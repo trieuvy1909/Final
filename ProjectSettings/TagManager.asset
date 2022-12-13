@@ -45,6 +45,15 @@ TagManager:
   - name: Background
     uniqueID: 143879677
     locked: 0
+  - name: Sky
+    uniqueID: 997350861
+    locked: 0
+  - name: Mouetain1
+    uniqueID: 3256674851
+    locked: 0
+  - name: Mouetain2
+    uniqueID: 445137437
+    locked: 0
   - name: Ground
     uniqueID: 3513868307
     locked: 0
