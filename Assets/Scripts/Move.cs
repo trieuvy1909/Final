@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    public int hearth = 5;
     private float horizontalInput;
     private float speed;
     private Rigidbody2D body;
