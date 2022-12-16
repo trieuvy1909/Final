@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
@@ -104,5 +105,13 @@ public class Move : MonoBehaviour
         {
             wallJumpCooldown += Time.deltaTime;
         }
+    }
+    void FixedUpdate(){
+        if(hearth<=0){
+            Dead();
+        }
+    }
+    void Dead(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
