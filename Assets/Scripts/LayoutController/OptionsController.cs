@@ -5,14 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class OptionsController : MonoBehaviour
 {
-    public void Map8(){
-        SceneManager.LoadScene("Level8");
+    public void soundSettingON(){
+    
     }
-    public void Map9(){
-        SceneManager.LoadScene("Level9");
-    }
-    public void Map10(){
-        SceneManager.LoadScene("Level10");
+    public void soundSettingOFF(){
+    
     }
     public void ReturnMenu(){
         SceneManager.LoadScene("Menu");
