@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class OptionsController : MonoBehaviour
 {
-    public void Map8(){
-        SceneManager.LoadScene("Level8");
+    public Button btnOn;
+    public Button btnOff;
+    public void soundSettingON(){
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource a in audios)
+        {
+            a.Play();
+        }
     }
-    public void Map9(){
-        SceneManager.LoadScene("Level9");
-    }
-    public void Map10(){
-        SceneManager.LoadScene("Level10");
+    public void soundSettingOFF(){
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource a in audios)
+        {
+            a.Pause();
+        }
     }
     public void ReturnMenu(){
         SceneManager.LoadScene("Menu");
