@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OptionsController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void Map8(){
+        SceneManager.LoadScene("Level8");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Map9(){
+        SceneManager.LoadScene("Level9");
+    }
+    public void Map10(){
+        SceneManager.LoadScene("Level10");
+    }
+    public void ReturnMenu(){
+        SceneManager.LoadScene("Menu");
     }
 }
