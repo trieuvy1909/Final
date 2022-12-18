@@ -56,6 +56,13 @@ public class Move : MonoBehaviour
             {
                 SceneManager.LoadScene("Level" + nextScene);
             }
+            else if(nextScene > 10){
+                SceneManager.LoadScene("win");
+            }
+        }
+        if (collision.GetComponent<vuctham>())
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
     void Start()
