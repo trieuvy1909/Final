@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Transform attackPoint;
     [SerializeField] private Animator animator;
     private int maxHealth;
     private int currentHealth;

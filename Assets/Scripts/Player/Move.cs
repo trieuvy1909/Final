@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Globalization;
 
 public class Move : MonoBehaviour
 {
+    private int maxHealth;
+    private int currentHealth;
     public int hearth = 5;
     private float horizontalInput;
     private float speed;
@@ -34,13 +38,46 @@ public class Move : MonoBehaviour
     //khoi tao cac bien
     private void Awake()
     {
+        maxHealth = 10000;
         body = GetComponent<Rigidbody2D>();
         speed = 4f;
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         jumpPower = 7f;
+        
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Door>())
+        {
+            string[] scene = SceneManager.GetActiveScene().name.Split("Level");
+            int nextScene = Int16.Parse(scene[1]) + 1;
+            if (nextScene <= 10)
+            {
+                SceneManager.LoadScene("Level" + nextScene);
+            }
+        }
+    }
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        anim.SetTrigger("Hurt");
+        if (currentHealth <= 0)
+        {
+            Die();
+            Dead();
+        }
+    }
+    void Die()
+    {
+        anim.SetBool("IsDead", true);
+        
+        this.enabled = false;
+    }
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -112,6 +149,6 @@ public class Move : MonoBehaviour
         }
     }
     void Dead(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Menu");
     }
 }
