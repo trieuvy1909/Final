@@ -12686,7 +12686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122513605}
   m_Layer: 0
-  m_Name: Foors
+  m_Name: Floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
