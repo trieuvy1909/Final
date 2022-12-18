@@ -72,18 +72,18 @@ public class Move : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        hearth= currentHealth/2000;
         anim.SetTrigger("Hurt");
         if (currentHealth <= 0)
         {
             Die();
-            Dead();
         }
     }
     void Die()
     {
-        anim.SetBool("IsDead", true);
-        
+        anim.SetBool("IsDead", true);  
         this.enabled = false;
+        SceneManager.LoadScene("Menu");
     }
     private void Update()
     {
@@ -149,13 +149,5 @@ public class Move : MonoBehaviour
         {
             wallJumpCooldown += Time.deltaTime;
         }
-    }
-    void FixedUpdate(){
-        if(hearth<=0){
-            Dead();
-        }
-    }
-    void Dead(){
-        SceneManager.LoadScene("Menu");
     }
 }
