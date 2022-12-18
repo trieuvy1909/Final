@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [SerializeField] private AudioSource cut;
     [SerializeField] private Animator animator;
     [SerializeField] Transform attackPoint;
     private float attackRange;
@@ -11,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
     private int attackDamage;
     void Awake()
     {
+        cut = GetComponent<AudioSource>();
         attackDamage = 40;
         attackRange = 1f;
     }
@@ -27,6 +29,7 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
+            cut.Play();
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
 
         }

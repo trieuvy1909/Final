@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Globalization;
 
 public class Move : MonoBehaviour
 {
+    private int maxHealth;
+    private int currentHealth;
     public int hearth = 5;
     private float horizontalInput;
     private float speed;
@@ -34,13 +38,53 @@ public class Move : MonoBehaviour
     //khoi tao cac bien
     private void Awake()
     {
+        maxHealth = 10000;
         body = GetComponent<Rigidbody2D>();
         speed = 4f;
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         jumpPower = 7f;
+        
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Door>())
+        {
+            string[] scene = SceneManager.GetActiveScene().name.Split("Level");
+            int nextScene = Int16.Parse(scene[1]) + 1;
+            if (nextScene <= 10)
+            {
+                SceneManager.LoadScene("Level" + nextScene);
+            }
+            else if(nextScene > 10){
+                SceneManager.LoadScene("win");
+            }
+        }
+        if (collision.GetComponent<vuctham>())
+        {
+            SceneManager.LoadScene("Menu");
+        }
+    }
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        hearth= currentHealth/2000;
+        anim.SetTrigger("Hurt");
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        anim.SetBool("IsDead", true);  
+        this.enabled = false;
+        SceneManager.LoadScene("Menu");
+    }
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -105,13 +149,5 @@ public class Move : MonoBehaviour
         {
             wallJumpCooldown += Time.deltaTime;
         }
-    }
-    void FixedUpdate(){
-        if(hearth<=0){
-            Dead();
-        }
-    }
-    void Dead(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

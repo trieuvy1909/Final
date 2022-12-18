@@ -5,15 +5,13 @@ using UnityEngine;
 public class Hearth : MonoBehaviour
 {
     public Move player;
-
     public Sprite[] spriteHearth;
 
-    public UnityEngine.UI.Image imageHearth;
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Move>();
     }
+    public UnityEngine.UI.Image imageHearth;
 
     // Update is called once per frame
     void FixedUpdate()

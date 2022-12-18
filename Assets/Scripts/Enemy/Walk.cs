@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Walk : StateMachineBehaviour
 {
-    private float attackRange = 1.5f;
+    private Transform attackPoint;
+    [SerializeField] private LayerMask playerLayers;
+    private float attackRange = 1f;
     private EnemyLookAtPlayer enemyLookAtPlayer;
     private Transform player;
     private Rigidbody2D rb;
     private float speed = 1.5f;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         enemyLookAtPlayer = animator.GetComponent<EnemyLookAtPlayer>();
+        attackPoint = animator.GetComponent<Enemy>().attackPoint;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -33,7 +38,16 @@ public class Walk : StateMachineBehaviour
         }
         if(Vector2.Distance(player.position, rb.position) <= attackRange)
         {
+            
             animator.SetTrigger("Attack");
+            Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayers);
+            foreach (Collider2D enemy in hitPlayer)
+            {
+                
+                enemy.GetComponent<Move>().TakeDamage(20);
+
+            }
+            
         }
     }
 
